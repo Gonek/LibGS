@@ -14,7 +14,6 @@ const STATUS = {
 class TestBase{
 
   constructor(){
-    this.utils = new TestUtils(this);
     this.testClassName = this.constructor.name;
     this.findTests();
   }
