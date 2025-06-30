@@ -39,7 +39,7 @@ class TestSheet{
     }
 
     saveProgress(){
-        let dataJson = JSON.stringify(testData);
+        let dataJson = JSON.stringify(testInfo);
         this.testSheet.getRange('A1').setValue(dataJson);
     }
 
@@ -47,7 +47,7 @@ class TestSheet{
         let rawData = this.testSheet.getRange('A1').getValue();
         if(rawData){
             console.log('Test sheet with test in progress found! Countinue execution');
-            testData.load(JSON.parse(rawData));
+            testInfo.load(JSON.parse(rawData));
             return true;
         }
         return false;
@@ -91,7 +91,7 @@ class TestSheet{
         this.testSheet.appendRow(['', ` - ${testName}`, '', status]);
     }
 
-    printSummary(testData){
+    printSummary(){
         let lr = this.testSheet.getLastRow();
         let summaryHeaderRange = this.testSheet.getRange(`B${lr+2}:D${lr+3}`);
         let summaryRange = this.testSheet.getRange(`B${lr+5}:C${lr+12}`);
@@ -101,14 +101,14 @@ class TestSheet{
         this.setFont(summaryHeaderRange, 12, 'Arial', 'bold');
         this.setFont(summaryRange, 11, 'Calibri', 'bold', 'left');
         this.setFont(testGroupRange, null, null, 'normal');
-        let results = [[' Test Run: ', testData.tests],
-                       ['   🟢 Succeded:', testData.tests - testData.fails - testData.errors],
-                       ['   🟡 Failed:', testData.fails],
-                       ['   🔴 Errored:', testData.errors],
+        let results = [[' Test Run: ', testInfo.tests],
+                       ['   🟢 Succeded:', testInfo.tests - testInfo.fails - testInfo.errors],
+                       ['   🟡 Failed:', testInfo.fails],
+                       ['   🔴 Errored:', testInfo.errors],
                        ['', ''],
-                       [' Test took:', `${testData.durration} ms ⏱️ ( ${testData.getTime().getMinutes()} min and ${testData.getTime().getSeconds()} sec )`],
+                       [' Test took:', `${testInfo.durration} ms ⏱️ ( ${testInfo.getTime().getMinutes()} min and ${testInfo.getTime().getSeconds()} sec )`],
                        ['', ''],
-                       ['TEST RESULT:', testData.fails + testData.errors ? '❌ FAILURE' : '✔️ SUCCESS']];
+                       ['TEST RESULT:', testInfo.fails + testInfo.errors ? '❌ FAILURE' : '✔️ SUCCESS']];
         summaryHeaderRange.setValues([['', '', ''],['Test summary: ', '', '']]);
         summaryRange.setValues(results);
     }

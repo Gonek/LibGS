@@ -1,4 +1,4 @@
-class TestData{
+class TestInfo{
   constructor(){
     this.tests = 0;
     this.fails = 0;
@@ -16,15 +16,15 @@ class TestData{
     this.isTestInProgress = false;
   }
 
-  load(testData){
-    this.tests = testData.tests;
-    this.fails = testData.fails;
-    this.errors = testData.errors;
-    this.messages = testData.messages;
+  load(testInfo){
+    this.tests = testInfo.tests;
+    this.fails = testInfo.fails;
+    this.errors = testInfo.errors;
+    this.messages = testInfo.messages;
     this.startTime = new Date();
-    this.durration = testData.durration;
-    this.savedClass = testData.savedClass;
-    this.savedTest = testData.savedTest;
+    this.durration = testInfo.durration;
+    this.savedClass = testInfo.savedClass;
+    this.savedTest = testInfo.savedTest;
   }
 
   error(message){
@@ -63,8 +63,8 @@ class TestData{
   }
 
   getTime(){
-    return this.time = this.time || new Date(testData.durration);
+    return this.time = this.time || new Date(this.durration);
   }
 }
 
-var testData = new TestData();
+var testInfo = new TestInfo();

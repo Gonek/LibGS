@@ -51,29 +51,12 @@ class Rng{
     return this.rng.getNumberFormat();
   }
 
-  setValue(value, row = 1, col = 1){
-    this.rng.getCell(row, col).setValue(value);
+  getNote(){
+    return this.rng.getNote();
   }
 
-  setValueAndFlush(value, row = 1, col = 1){
-    this.setValue(value, row, col);
-    SpreadsheetApp.flush();
-  }
-
-  setValues(values){
-    this.rng.setValues(values);
-  }
-
-  setValuesWithResize(values){
-    this.setValues(resizeMatrix(values, this.rng.getWidth(), this.rng.getHeight()));
-  }
-
-  setNumberFormat(format){
-    return this.rng.setNumberFormat(format);
-  }
-
-  setFormulaToValue(){
-    this.rng.setValue(this.rng.getValue());
+  getNotes(){
+    return this.rng.getNotes();
   }
 
   getRowAsArray(row = 1){
@@ -106,8 +89,7 @@ class Rng{
       return dataValidation?.getCriteriaValues().slice(0, -1);
     } else {
       return dataValidation?.getCriteriaValues();
-    }
-    
+    } 
   }
 
   getValidationCriteriaRangeValues(row = 1, col = 1){
@@ -116,6 +98,39 @@ class Rng{
 
   getA1Pos(){
     return this.rng.getA1Notation();
+  }
+
+  setValue(value, row = 1, col = 1){
+    this.rng.getCell(row, col).setValue(value);
+  }
+
+  setValueAndFlush(value, row = 1, col = 1){
+    this.setValue(value, row, col);
+    SpreadsheetApp.flush();
+  }
+
+  setValues(values){
+    this.rng.setValues(values);
+  }
+
+  setValuesWithResize(values){
+    this.setValues(resizeMatrix(values, this.rng.getWidth(), this.rng.getHeight()));
+  }
+
+  setNumberFormat(format){
+    return this.rng.setNumberFormat(format);
+  }
+
+  setFormulaToValue(){
+    this.rng.setValue(this.rng.getValue());
+  }
+
+  setNote(value){
+    return this.rng.setNote(value);
+  }
+
+  setNotes(values){
+    return this.rng.setNotes(values);
   }
 
   isBlank(){

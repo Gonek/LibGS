@@ -81,7 +81,7 @@
     let verifyObj = new Proxy(obj, verifyHandler);
     
     if(obj instanceof Sht){
-      addSpr(obj.getId(), mockedObj);
+      addSht(obj.getId(), mockedObj);
     } else if(obj instanceof Rng){
       addRng(obj.getName(), mockedObj);
     } else if(obj instanceof SpSh){
@@ -98,7 +98,7 @@ const mockSpSh = (spsh) => {
   return mock(new SpSh(spsh, true));
 }
 
-const mockSpr = (sht) => {
+const mockSht = (sht) => {
   return mock(new Sht(sht, true));
 }
 

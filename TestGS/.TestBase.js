@@ -69,7 +69,7 @@ class TestBase{
   }
 
   runAllTestsCore(){
-    if(testData.savedClassCheck(this)) return;
+    if(testInfo.savedClassCheck(this)) return;
     this.printUpdate(`Start running all test for ${this.testClassName}`, this.testClassName, true);
     try{
       this.beforeAll();
@@ -83,11 +83,11 @@ class TestBase{
 
   runTest(test){
     this.timoutKillSwitch();
-    if(testData.savedTestCheck(test.toString())) return;
+    if(testInfo.savedTestCheck(test.toString())) return;
     this.beforeEach();
     try{
-      testData.currentStatus = STATUS.SUCCESS;
-      console.log(`Start test: ${testData.currentTest}`);
+      testInfo.currentStatus = STATUS.SUCCESS;
+      console.log(`Start test: ${testInfo.currentTest}`);
       try{
         this[test]();
       }catch(e){
@@ -100,27 +100,27 @@ class TestBase{
   }
 
   testFinished(){
-    testData.tests++;
-    switch(testData.currentStatus){
+    testInfo.tests++;
+    switch(testInfo.currentStatus){
       case STATUS.SUCCESS : console.info(`Test finished with: ✔️ SUCCESS`); break;
       case STATUS.FAIL : {
-        testData.fails++; 
+        testInfo.fails++; 
         console.warn('Test finished with: ⚠️ FAILURE');
         break;
       }
       case STATUS.ERROR : {
-        testData.errors++; 
+        testInfo.errors++; 
         console.warn('Test finished with: ❌ ERROR');
         break;
       }
     }
     console.log('');
-    testSheet?.printTestNameAndResult(testData.currentTest, testData.currentStatus);
+    testSheet?.printTestNameAndResult(testInfo.currentTest, testInfo.currentStatus);
   }
 
   start(){
     testSheet?.start();
-    testData.start();
+    testInfo.start();
   }
 
   timeOut(e){
@@ -135,7 +135,7 @@ class TestBase{
   }
 
   end(){
-    testData.end();
+    testInfo.end();
     this.printResults();
     testSheet?.finished();
   }
@@ -163,7 +163,7 @@ class TestBase{
   clearData(){}
 
   printUpdate(consoleUpdate, sheetUpdate, isTestName = false){
-    if(!testData.savedTest){
+    if(!testInfo.savedTest){
       console.info(consoleUpdate);
       console.info('');
       testSheet?.printUpdate(sheetUpdate, isTestName);
@@ -173,24 +173,24 @@ class TestBase{
   printResults(){
     console.info(`🏁 All test finished! 🏁`);
     console.info(``);
-    console.info(`Test run: ${testData.tests} 🎯`);
-    console.info(`  🟢 Succeded: ${testData.tests - testData.fails - testData.errors}`);
-    console.info(`  🟡 Failed: ${testData.fails}`);
-    console.info(`  🔴 Errored: ${testData.errors}`);
-    if (testData.messages.length > 0){
+    console.info(`Test run: ${testInfo.tests} 🎯`);
+    console.info(`  🟢 Succeded: ${testInfo.tests - testInfo.fails - testInfo.errors}`);
+    console.info(`  🟡 Failed: ${testInfo.fails}`);
+    console.info(`  🔴 Errored: ${testInfo.errors}`);
+    if (testInfo.messages.length > 0){
       console.info(``);
       console.info(`Test failure messages:`);
-      testData.messages.forEach((message) => console.warn(message));
+      testInfo.messages.forEach((message) => console.warn(message));
     }
     console.info(``);
-    console.info(`Test took: ${testData.durration} ms ⏱️ ( ${testData.getTime().getMinutes()} min and ${testData.getTime().getSeconds()} sec )`);
+    console.info(`Test took: ${testInfo.durration} ms ⏱️ ( ${testInfo.getTime().getMinutes()} min and ${testInfo.getTime().getSeconds()} sec )`);
     console.info(``);
-    if(testData.fails + testData.errors >0){
+    if(testInfo.fails + testInfo.errors >0){
       console.warn(`TEST RESULT : ❌ FAILURE`);
     } else {
       console.info(`TEST RESULT : ✔️ SUCCESS`);
     }
-    testSheet?.printSummary(testData);
+    testSheet?.printSummary(testInfo);
   }
 
   getAllMethodNames(obj) {
@@ -203,10 +203,10 @@ class TestBase{
   }
 
   timoutKillSwitch(){
-    if(testSheet && (testData.getCurrentRunDuration() > TIMEOUT_TRESHOLD_MS)){
-      testData.savedClass = testData.currentClass;
-      testData.savedTest = testData.currentTest;
-      testData.end();
+    if(testSheet && (testInfo.getCurrentRunDuration() > TIMEOUT_TRESHOLD_MS)){
+      testInfo.savedClass = testInfo.currentClass;
+      testInfo.savedTest = testInfo.currentTest;
+      testInfo.end();
       testSheet.saveProgress();
       throw new TimeOutException();
     } 

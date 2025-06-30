@@ -7,9 +7,9 @@ class Sht{
     if(!test){
       if(typeof id === "string" && id.includes('.')){
         let s = id.split('.');
-        this.sht = getSpSh(s[0]).getSheetById(s[1]);
+        this.sht = getSpSh(s[0]).getShtById(s[1]);
       }else{
-        this.sht = getSpSh(SPSH.ACTIVE).getSheetById(id);
+        this.sht = getSpSh(SPSH.ACTIVE).getShtById(id);
       }
     }
   }
@@ -104,6 +104,10 @@ class Sht{
     }
   }
 
+  setName(newName){
+    this.sht.setName(newName);
+  }
+
   putDataAtEnd(data){
     this.setAreaValueAtPos(this.getLastRow()+1, 2, data);
   }
@@ -188,7 +192,7 @@ class Sht{
     this.sht.deleteRows(deleteFrom, deleteTo - deleteFrom);
   }
 
-  deleteSpr(){
+  deleteSht(){
     ACTIVE.deleteSheet(this.sht);
   }
 

@@ -103,19 +103,19 @@ function assertException(test, needFlush = false, exception = undefined){
 }
 
 function testSucceded(message){
-  if(!(testData.isAcceptanceTest)){
+  if(!(testInfo.isAcceptanceTest)){
     console.info(`🟢 ${message}`);
   }
 }
 
 function testFailed(message){
-  testData.currentStatus = STATUS.FAIL;
+  testInfo.currentStatus = STATUS.FAIL;
   console.warn(`🟡 FAIL!: ${message}`);
-  testData.error(message);
+  testInfo.error(message);
 }
 
 function testError(message){
-  testData.currentStatus = STATUS.ERROR;
+  testInfo.currentStatus = STATUS.ERROR;
   console.warn(`🔴 ERROR!: ${message}`);
-  testData.error(message);
+  testInfo.error(message);
 }

@@ -25,7 +25,7 @@ var getRng = (name) => dependencyManager.getRng(name);
 
 var addObj = (name, obj) => dependencyManager.addObj(name, obj);
 var addSpSh = (id, spsh) => dependencyManager.addSpSh(id, spsh);
-var addSpr = (name, sht) => dependencyManager.addSpr(name, sht);
+var addSht = (name, sht) => dependencyManager.addSht(name, sht);
 var addRng = (name, rng) => dependencyManager.addRng(name, rng);
 
 var clearDm = () => dependencyManager.clear();
@@ -74,7 +74,7 @@ class DependencyManager {
     this.spshs.set(id, spsh);
   }
 
-  addSpr(name, sht){
+  addSht(name, sht){
     this.sprs.set(name, sht);
   }
 

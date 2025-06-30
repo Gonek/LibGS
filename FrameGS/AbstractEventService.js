@@ -23,7 +23,7 @@ class AbstractEventService {
   }
 
   errorHandler(error){
-    if(!testData?.isTestInProgress){
+    if(!testInfo?.isTestInProgress){
       alert(error + " " + error.stack);
     }else{
       throw error;

@@ -18,11 +18,11 @@ class SpSh{
         return this.spsh && this.spsh !== 'null' && this.spsh !== 'undefined';
     }
 
-    getSheetByName(name){
+    getShtByName(name){
         return this.spsh.getSheetByName(name);
     }
 
-    getSheetById(id){
+    getShtById(id){
         return this.spsh.getSheetById(id);
     }
 
