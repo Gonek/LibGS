@@ -184,6 +184,10 @@ class Sht{
     this.sht.getRange(range).deleteCells(shiftDimmension)
   }
 
+  deleteCellsInArea(row, col, numRows, numCols, shiftDimmension = SpreadsheetApp.Dimension.ROWS){
+    this.sht.getRange(row, col, numRows, numCols).deleteCells(shiftDimmension)
+  }
+
   deleteRow(deleteIndex){
     this.sht.deleteRow(deleteIndex);
   }

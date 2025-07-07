@@ -1,9 +1,7 @@
 class Btn extends Input{
-
-  isEventInProgress(){
-    return this.getRng().getValue();
-  }
-
+  /**
+   * Run the assigned function and reset the button state after it's finished ( or failed ). 
+   */
   run(){
     try{
       super.run();
@@ -18,7 +16,10 @@ class Btn extends Input{
     }
   }
 
+  /**
+   * Reset the state od the button
+   */
   resetButton(){
-    this.rng.setValue(false);
+    this.getRng().setValue(false);
   }
 }
