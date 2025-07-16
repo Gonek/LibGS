@@ -34,7 +34,7 @@ class Sht{
     return this.sht.getRange(row, col).getValue();
   }
 
-  getAreaValue(row, col, numRows, numCols){
+  getAreaValues(row, col, numRows, numCols){
     return this.sht.getRange(row, col, numRows, numCols).getValues();
   }
 

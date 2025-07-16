@@ -11,8 +11,8 @@ class Rng{
     return this.name;
   }
 
-  copyTo(rng){
-    this.rng.copyTo(rng.rng);
+  copyTo(rng, copyPasteType = SpreadsheetApp.CopyPasteType.PASTE_NORMAL){
+    this.rng.copyTo(rng.rng, copyPasteType);
   }
 
   getValue(row = 1, col = 1){
@@ -63,8 +63,16 @@ class Rng{
     return this.rng.getValues()[row - 1];
   }
 
+  getDisplayRowAsArray(row = 1){
+    return this.rng.getDisplayValues()[row - 1];
+  }
+
   getColAsArray(col = 1){
     return this.rng.getValues().map(row => row[col -1]);
+  }
+
+  getDisplayColAsArray(col = 1){
+    return this.rng.getDisplayValues().map(row => row[col -1]);
   }
 
   getRow(){
