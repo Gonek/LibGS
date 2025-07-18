@@ -80,3 +80,7 @@ function mapEqual(a, b){
   }
   return true;
 }
+
+function getSheetId(){
+  alert(SpreadsheetApp.getActiveSheet().getSheetId());
+}
