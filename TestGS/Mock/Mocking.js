@@ -1,4 +1,5 @@
  var mocks = [];
+ var globalObjCallCounter = 1;
  
  const mock = (obj) => {
     let objCalls = [];
@@ -8,7 +9,7 @@
         get(target, prop, receiver) {
             return function (...args) {
               if(typeof prop === 'symbol') return target.name;
-              let call = new Call(prop, args); 
+              let call = new Call(prop, args, globalObjCallCounter++); 
               let oCall = objCalls.find(c => c.isEqual(call));
               if(oCall){ 
                 oCall.incCount();
@@ -70,6 +71,20 @@
                         testFailed(`${target.name}.${prop}(${JSON.stringify(args)}) expected to be called but it didn't`);
                         printCalls(target, objCalls);
                     }
+                },
+
+                calledInOrder(orderPosition){
+                  let call = objCalls.find(c => c.isEqual(new Call(prop, args)));
+                  if(call){
+                        if(!orderPosition || orderPosition == call.order){
+                            testSucceded(`"${prop}" has been called at the expected position`);
+                        }else{
+                            testFailed(`"${prop}" has been called, but at ${call.order}. instead of the expected ${orderPosition}. position`);
+                        }
+                    }else{
+                        testFailed(`${target.name}.${prop}(${JSON.stringify(args)}) expected to be called but it didn't`);
+                        printCalls(target, objCalls);
+                    }
                 }
               }
             };
@@ -108,6 +123,7 @@ const mockRng = (rng) => {
 
 const clearMockCalls = () => {
   mocks.forEach(m => m.clear());
+  globalObjCallCounter = 1;
 }
 
 const printCalls = (obj, objCalls) => {

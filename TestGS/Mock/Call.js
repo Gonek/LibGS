@@ -1,7 +1,8 @@
 class Call{
-    constructor(prop, args) {
+    constructor(prop, args, order) {
         this.prop = prop;
         this.args = args;
+        this.order = order;
         this.count = 1;
     }
 
