@@ -8,10 +8,13 @@ var getYesterday = () => {
   return getRelativeDay(-1);
 }
 
-var getRelativeDay = (offset) => {
+var getRelativeDay = (offset, format = undefined) => {
   var date = new Date();
   date.setHours(0,0,0,0);
   date.setDate(date.getDate() + offset);
+  if(format){
+    return date.toLocaleDateString(format);
+  }
   return date;
 }
 

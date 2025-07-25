@@ -1,3 +1,4 @@
+const ONLY_MARKER = 'X_';
 const TEST_METHOD_MARKER = 'should';
 const SCENARIO_METHOD_MARKER = 'scenario_';
 const TIMEOUT_TRESHOLD_MS = 330000;
@@ -20,8 +21,11 @@ class TestBase{
 
   findTests(){
     let functions = this.getAllMethodNames(this);
-    this.testCases = [...functions].filter(name => name.startsWith(TEST_METHOD_MARKER) ||
-                                                   name.startsWith(SCENARIO_METHOD_MARKER));
+    this.testCases = [...functions].filter(name => name.startsWith(ONLY_MARKER));
+    if (this.testCases.length == 0){
+      this.testCases = [...functions].filter(name => name.startsWith(TEST_METHOD_MARKER) ||
+                                                    name.startsWith(SCENARIO_METHOD_MARKER));
+    }
   }
 
   runAllTests(){
