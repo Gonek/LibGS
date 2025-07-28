@@ -91,6 +91,10 @@ class Rng{
     return this.rng.getWidth();
   }
 
+  getNote(){
+    return this.rng.getNote();
+  }
+
   getValidationCriteriaValues(row = 1, col = 1){
     let dataValidation = this.rng.getCell(row, col).getDataValidation();
     if(dataValidation?.getCriteriaType() == SpreadsheetApp.DataValidationCriteria.VALUE_IN_LIST){
@@ -134,23 +138,23 @@ class Rng{
   }
 
   setNote(value){
-    return this.rng.setNote(value);
+    this.rng.setNote(value);
   }
 
   setNotes(values){
-    return this.rng.setNotes(values);
+    this.rng.setNotes(values);
   }
 
   isBlank(){
     return this.rng.isBlank();
   }
 
-  clear(){
+  clearContent(){
     this.rng.clearContent();
   }
 
   clearAndSetValues(values){
-    this.clear();
+    this.clearContent();
     this.setValues(values);
   }
 }

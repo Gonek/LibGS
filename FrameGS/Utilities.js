@@ -18,14 +18,19 @@ var getRelativeDay = (offset, format = undefined) => {
   return date;
 }
 
-var resizeMatrix =(arr, width, height, val = null) => {
-  const newRow = row => Array.from({ length: width }, (_, i) => {
-    return i < row.length ? row[i] : val
-  });
-  return Array.from({ length: height }, (_, i) => {
-    return i < arr.length ? newRow(arr[i]) : Array.from({ length: width }, () => val);
-  });
+var getFormatedDay = (position) => {
+    return `${position < 0 ? '🗃️' : (position > 0 ? '📅' : '🚩')} ${getRelativeDay(position, 'en-GB')}`;
 }
+
+var resizeMatrix = (arr, width, height, val = null) => 
+  Array.from({ length: height }, (_, i) => {
+    return i < arr.length ? resizeArray(arr[i], width, val) : Array.from({ length: width }, () => val);
+  });
+
+var resizeArray = (arr, width, val = null) => 
+  Array.from({ length: width }, (_, i) => { 
+    return i < arr.length ? arr[i] : val 
+  });
 
 function uniq(a) {
   return Array.from(new Set(a));

@@ -25,6 +25,10 @@ class BtnF extends Btn{
 
   resetButton(){
     this.setValue('');
-    this.getRng().setValue(false, 1, this.btnIndex);
+    this.setButtonState(false);
+  }
+
+  setButtonState(bool){
+    this.getRng().setValue(bool, 1, this.btnIndex);
   }
 }

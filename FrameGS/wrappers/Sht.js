@@ -18,6 +18,10 @@ class Sht{
     return this.id;
   }
 
+  getName(){
+    return this.sht.getName();
+  }
+
   getValue(range) {
     return this.sht.getRange(range).getValue();
   }
@@ -112,10 +116,6 @@ class Sht{
     this.setAreaValueAtPos(this.getLastRow()+1, 2, data);
   }
 
-  setName(name){
-    this.sht.setName(name);
-  }
-
   getLastRow(){
     return this.sht.getLastRow();
   }
@@ -176,7 +176,7 @@ class Sht{
     this.sht.getFilter().sort(column, true);
   }
 
-  clear(range){
+  clearContent(range){
     this.sht.getRange(range).clearContent();
   }
 
