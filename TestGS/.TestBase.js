@@ -1,7 +1,7 @@
 const ONLY_MARKER = 'X_';
 const TEST_METHOD_MARKER = 'should';
 const SCENARIO_METHOD_MARKER = 'scenario_';
-const TIMEOUT_TRESHOLD_MS = 330000;
+const TIMEOUT_TRESHOLD_MS = 300000;
 const TIMES = {
   ONCE : 1,
   TWICE : 2
