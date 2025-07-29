@@ -60,8 +60,10 @@ class TestBase{
       this.printUpdate('Start running all Acceptance tests', 'Acceptance tests');
       this.runMultipleTestClassCore(acceptanceTests);
       this.end();
+      return true;
     }catch(e){
       this.timeOut(e);
+      return false;
     }
   }
 
@@ -86,8 +88,8 @@ class TestBase{
   }
 
   runTest(test){
-    this.timoutKillSwitch();
     if(testInfo.savedTestCheck(test.toString())) return;
+    this.timoutKillSwitch();
     this.beforeEach();
     try{
       testInfo.currentStatus = STATUS.SUCCESS;
