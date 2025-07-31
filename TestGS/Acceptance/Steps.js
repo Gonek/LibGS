@@ -16,7 +16,7 @@ class Steps{
      */
     clickButton(sht, rng, A1Pos = undefined){
         getRng(rng).setValue(true);
-        getObj(EventService).testButton(sht, rng, A1Pos);
+        getObj(EventService).triggerButtonEvent(sht, rng, A1Pos);
     }
 
     /**
@@ -27,7 +27,7 @@ class Steps{
      */
     changeCbox(sht, rng, value){
         getRng(rng).setValue(value);
-        getObj(EventService).testButton(sht, rng);
+        getObj(EventService).triggerButtonEvent(sht, rng);
     }
 
     /**
@@ -39,7 +39,7 @@ class Steps{
      */
     clickButtonWithField(sht, name, A1Pos, btnIndex){
         getRng(name).setValue(true, 1, btnIndex);
-        getObj(EventService).testButton(sht, name, A1Pos);
+        getObj(EventService).triggerButtonEvent(sht, name, A1Pos);
     }
 
     /**
@@ -50,7 +50,7 @@ class Steps{
      */
     changeCbox(sht, name, to){
         getRng(name).setValue(to);
-        getObj(EventService).testButton(sht, name);
+        getObj(EventService).triggerButtonEvent(sht, name);
     }
 
 
@@ -65,7 +65,7 @@ class Steps{
      */
     changeField(sht, name, row, col, a1pos, to){
         getRng(name).setValue(to, row, col);
-        getObj(EventService).testButton(sht, name, a1pos);
+        getObj(EventService).triggerButtonEvent(sht, name, a1pos);
     }
 
     /**

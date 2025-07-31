@@ -30,8 +30,13 @@ class AbstractEventService {
     }
   }
 
-  testButton(sheetName, btnName, A1Pos = undefined){
-    this.checkButtons(sheetName, A1Pos ? A1Pos: getRng(btnName).getA1Pos());
+  clickButton(sheetName, btnName, a1Pos = undefined){
+    getRng(btnName).setValueAndFlush(true);
+    this.triggerButtonEvent(sheetName, btnName, a1Pos);
+  }
+
+  triggerButtonEvent(sheetName, btnName, a1Pos = undefined){
+    this.checkButtons(sheetName, a1Pos ? a1Pos: getRng(btnName).getA1Pos());
   }
 
   checkButtons(sheetId, a1Pos){
